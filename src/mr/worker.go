@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 )
 import "log"
 import "net/rpc"
@@ -47,7 +48,8 @@ func Worker(mapf func(string, string) []KeyValue, reducef func(string, []string)
 		}
 
 		if !reply.Bool {
-			return
+			time.Sleep(3 * time.Second)
+			continue
 		}
 
 		task := reply.Task
